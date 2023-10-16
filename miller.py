@@ -14,6 +14,8 @@ def isPrime(n):
     return True
 
 def isPrimeMiller(n):
+    if n == 2:
+        return True
     for i in range(20):
         b = random.randrange(2, n)
         ok = miller(n, b)
@@ -39,8 +41,15 @@ def miller(n, b):
     return False
     
 if __name__ == "__main__":
-    for i in range(3, 1000000):
-        if isPrime(i) != isPrimeMiller(i):
-            print("Failed", i)
-            sys.exit(0)
-    print("OK")
+    if sys.argv[1] == "test":
+        for i in range(3, 1000000):
+            if isPrime(i) != isPrimeMiller(i):
+                print("Failed", i)
+                sys.exit(0)
+        print("OK")
+    else:
+        n = int(sys.argv[1])
+        if isPrimeMiller(n):
+            print("Prime")
+        else:
+            print("Not Prime")
